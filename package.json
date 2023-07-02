@@ -1,5 +1,5 @@
 {
-  "name": "geohash",
+  "name": "ts-geohash",
   "description": "A fork of Chris Veness' Gustavo Niemeyer's geocoding system implementation adding typescript.",
   "homepage": "https://github.com/gabrielmedici/geohash",
   "author": "Chris Veness",
