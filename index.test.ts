@@ -1,39 +1,29 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 /*  Geohash Test Harness                                (c) Chris Veness 2014-2019 / MIT Licence  */
+/*  Changed to vitest by github.com/gabrielmedici                                                 */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
-// FIXME: Tests are broken.
-
-import Geohash from "./dist/index.js";
-
-if (typeof window == "undefined") {
-  // node
-  import("chai").then((chai) => {
-    global.should = chai.should();
-  });
-} else {
-  // browser
-  window.should = chai.should();
-}
+import Geohash from "./index";
+import { describe, expect, it } from "vitest";
 
 describe("latlon-geohash", function () {
   it("encodes Jutland", function () {
-    Geohash.encode(57.648, 10.41, 6).should.equal("u4pruy");
+    expect(Geohash.encode(57.648, 10.41, 6)).toBe("u4pruy");
   });
   it("decodes Jutland", function () {
-    Geohash.decode("u4pruy").should.deep.equal({ lat: 57.648, lon: 10.41 });
+    expect(Geohash.decode("u4pruy")).toStrictEqual({ lat: 57.648, lon: 10.41 });
   });
   it("encodes Curitiba", function () {
-    Geohash.encode(-25.38262, -49.26561, 8).should.equal("6gkzwgjz");
+    expect(Geohash.encode(-25.38262, -49.26561, 8)).toBe("6gkzwgjz");
   });
   it("decodes Curitiba", function () {
-    Geohash.decode("6gkzwgjz").should.deep.equal({
+    expect(Geohash.decode("6gkzwgjz")).toStrictEqual({
       lat: -25.38262,
       lon: -49.26561,
     });
   });
   it("fetches neighbours", function () {
-    Geohash.neighbours("ezzz").should.deep.equal({
+    expect(Geohash.neighbours("ezzz")).toStrictEqual({
       n: "gbpb",
       ne: "u000",
       e: "spbp",
@@ -45,8 +35,6 @@ describe("latlon-geohash", function () {
     });
   });
   it("matches geohash.org", function () {
-    Geohash.encode(37.25, 123.75, 12).should.equal("wy85bj0hbp21");
-  }); // (also PostGIS; thx Jussi Nieminen)
+    expect(Geohash.encode(37.25, 123.75, 12)).toBe("wy85bj0hbp21");
+  });
 });
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
